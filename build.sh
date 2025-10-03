@@ -472,7 +472,14 @@ build_aria2() {
   fi
   mkdir -p "/usr/src/aria2-${aria2_tag}"
   tar -zxf "${DOWNLOADS_DIR}/aria2-${aria2_tag}.tar.gz" --strip-components=1 -C "/usr/src/aria2-${aria2_tag}"
+  cd "/usr/src"
+  wget -nv https://github.com/myfreeer/aria2-build-msys2/raw/refs/heads/master/aria2-0002-options-unlock-connection-per-server-limit.patch
+  wget -nv https://github.com/myfreeer/aria2-build-msys2/raw/refs/heads/master/aria2-0003-download-retry-on-slow-speed-and-reset.patch
+  wget -nv https://github.com/myfreeer/aria2-build-msys2/raw/refs/heads/master/aria2-0005-option-add-option-to-retry-on-http-4xx.patch
   cd "/usr/src/aria2-${aria2_tag}"
+  patch -p1 <../aria2-0002-options-unlock-connection-per-server-limit.patch
+  patch -p1 <../aria2-0003-download-retry-on-slow-speed-and-reset.patch
+  patch -p1 <../aria2-0005-option-add-option-to-retry-on-http-4xx.patch
   if [ ! -f ./configure ]; then
     autoreconf -i
   fi
