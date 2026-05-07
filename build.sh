@@ -134,8 +134,8 @@ case "${TARGET_HOST}" in
   ;;
 *)
   TARGET_HOST=Linux
-  apt install -y "qemu-user-static"
-  RUNNER_CHECKER="qemu-${TARGET_ARCH}-static"
+  apt install -y "qemu-user"
+  RUNNER_CHECKER="qemu-${TARGET_ARCH}"
   ;;
 esac
 
